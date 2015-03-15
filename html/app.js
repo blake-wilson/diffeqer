@@ -1,4 +1,4 @@
-var HOST = "http://localhost:8080"
+var HOST = "http://synthetic-verve-88502.appspot.com/"
 
 function get_results() {
 	para = document.getElementById("result");
