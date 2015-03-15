@@ -1,7 +1,14 @@
 var HOST = "http://synthetic-verve-88502.appspot.com/"
 
-function get_results() {
-	para = document.getElementById("result");
+
+function updateIters() {
+	var iters = document.getElementById("iterations").value;
+
+	getResults(iters.toString());
+}
+
+function getResults(numIters) {
+	chart = document.getElementById("result");
 	xhr = new XMLHttpRequest();
 	xhr.onload = function(e) {
 		if (xhr.readyState == 4 && xhr.status == 200) {
@@ -16,10 +23,11 @@ function get_results() {
 				vAxis: {title: "Value", minValue: min, maxValue: max},
 				legend: "none"
 			};
+
+			draw_chart(info.time, info.estimates, options);
 		}
-		draw_chart(info.time, info.estimates, options);
 	}
-	xhr.open("GET", HOST, true);
+	xhr.open("GET", HOST + "timestep/" + numIters, true);
 	xhr.send()
 }
 

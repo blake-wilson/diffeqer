@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"net/http"
+	"strconv"
 
 	"github.com/blake-wilson/diffeq/methods"
 
@@ -17,11 +18,15 @@ func simpleFuncDeriv(params ...float64) float64 {
 	return 6 * params[0]
 }
 
-func handler(w http.ResponseWriter, r *http.Request) {
+func timeStepHandler(w http.ResponseWriter, r *http.Request) {
+
+	// get number of iterations from http request
+	responseIterations, _ := strconv.ParseFloat(r.URL.Path[len(TimeStepConstant)+1:], 64)
+	timestep := 4.0 / responseIterations
 
 	c := appengine.NewContext(r)
 
-	times, estimates := diffeq.Taylor(simpleFunc, 1, 0, 4, 0.01, simpleFuncDeriv)
+	times, estimates := diffeq.Taylor(simpleFunc, 1, 0, 4, timestep, simpleFuncDeriv)
 	packedData := DiffeqData{
 		Time:      times,
 		Estimates: estimates,
@@ -40,6 +45,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 }
 
 func init() {
-	http.HandleFunc("/", handler)
+	http.HandleFunc(TimeStepConstant, timeStepHandler)
+	http.HandleFunc("/", timeStepHandler)
 	http.ListenAndServe(":8080", nil)
 }
