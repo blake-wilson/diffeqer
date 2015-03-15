@@ -11,6 +11,11 @@
 		<p>Range</p>
 		<input type="range" id="range" value="4" min="1" max="30"
 		oninput="updateRange()">
+		<br />
+		<select id="method" onchange="setMethod()">
+			<option value="euler">Euler</option>
+			<option value="taylor">Taylor</option>
+		</select>
 		<div id="result" style="width:800px; height: 500px;"></div>
 	</body>
 </html>

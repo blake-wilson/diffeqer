@@ -13,6 +13,11 @@ function updateRange() {
 	requestUpdate("maxrange/", maxRange.toString());
 }
 
+function setMethod() {
+	var method = document.getElementById("method").value;
+	requestUpdate("method/", method);
+}
+
 function requestUpdate(requestString, newVal) {
 	chart = document.getElementById("result");
 	xhr = new XMLHttpRequest();

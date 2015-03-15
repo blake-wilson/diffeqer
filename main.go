@@ -9,6 +9,7 @@ import (
 )
 
 var timestep, minrange, maxrange float64
+var method Method
 
 func simpleFunc(params ...float64) float64 {
 	return 3 * params[0] * params[0]
@@ -19,7 +20,14 @@ func simpleFuncDeriv(params ...float64) float64 {
 }
 
 func evaluateDiffeq() *DiffeqData {
-	times, estimates := diffeq.Taylor(simpleFunc, 1, minrange, maxrange, timestep, simpleFuncDeriv)
+	var times, estimates []float64
+
+	switch method {
+	case Taylor:
+		times, estimates = diffeq.Taylor(simpleFunc, 1, minrange, maxrange, timestep, simpleFuncDeriv)
+	case Euler:
+		times, estimates = diffeq.Euler(simpleFunc, 1, minrange, maxrange, timestep)
+	}
 	return &DiffeqData{
 		Time:      times,
 		Estimates: estimates,
@@ -43,6 +51,17 @@ func timeStepHandler(w http.ResponseWriter, r *http.Request) {
 	writeResponse(w, data)
 }
 
+func methodHandler(w http.ResponseWriter, r *http.Request) {
+	switch r.URL.Path[len(MethodNameConstant):] {
+	case "euler":
+		method = Euler
+	case "taylor":
+		method = Taylor
+	}
+	data := evaluateDiffeq()
+	writeResponse(w, data)
+}
+
 func writeResponse(w http.ResponseWriter, data *DiffeqData) {
 	json, err := json.Marshal(data)
 
@@ -61,5 +80,6 @@ func init() {
 	maxrange = 10
 	http.HandleFunc(TimeStepConstant, timeStepHandler)
 	http.HandleFunc(MaxRangeConstant, maxRangeHandler)
+	http.HandleFunc(MethodNameConstant, methodHandler)
 	http.ListenAndServe(":8080", nil)
 }
