@@ -1,0 +1,11 @@
+application: synthetic-verve-88502
+version: alpha-001
+runtime: go
+api_version: go1
+
+handlers:
+- url : /html
+  static_dir: html
+
+- url: /.*
+  script: _go_app
