@@ -9,6 +9,6 @@ const (
 )
 
 const (
-	Euler = iota
+	Euler Method = iota
 	Taylor
 )
