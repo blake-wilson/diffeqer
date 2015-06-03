@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"net/http"
 
 	"github.com/blake-wilson/diffeq/methods"
@@ -50,7 +51,10 @@ func requestHandler(w http.ResponseWriter, r *http.Request) {
 		// Could not decode JSON
 		return
 	}
+	fmt.Printf("OPTS: %v\n\n", opts)
 	response := evaluateDiffeq(opts.Expression)
+
+	fmt.Printf("resonse:\n\n", response)
 	writeResponse(w, response)
 }
 

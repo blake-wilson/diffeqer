@@ -1,0 +1,17 @@
+body {
+	font-family: sans-serif;
+	background: #EAEAEA;
+}
+
+.app_element {
+	width: 80%;
+}
+
+#app_area {
+	text-align: center;
+	width: 40%;
+	margin: auto;
+	border-radius: 25px;
+	padding: 2em;
+	background: #FFFFFF;
+}

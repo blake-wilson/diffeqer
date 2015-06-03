@@ -2,25 +2,34 @@
 	<head>
 		<script src="app.js"></script>
 		<script type="text/javascript" src="https://www.google.com/jsapi?autoload={'modules':[{'name':'visualization','version':'1.1','packages':['corechart']}]}"></script>
+		<link rel="stylesheet" type="text/css" href="app.css">
 	</head>
 	<body>
-		<p>Timestep</p>
-		<input  type="range" id="timestep" value="100" min="1",
+		<div align="center" id="app_area">
+		<p>Timestep
+		<br />
+		<input type="range" class="app_element" id="timestep" value="100" min="1",
 		max="200"
 		oninput="requestUpdate()">
+		</p>
 		<p>Range</p>
-		<input type="range" id="range" value="4" min="1" max="30"
+		<input type="range" class="app_element" id="range" value="4" min="1" max="30"
 		oninput="requestUpdate()">
 		<br />
 		<br />
-		y' = <input id="expression" onkeydown="if (event.keyCode == 13)
+		<p>
+		y' = <input class="app_element" id="expression" onkeydown="if (event.keyCode == 13)
 		requestUpdate()">
 		<br />
 		<br />
+		</p>
+		<p>Numerical Method
 		<select id="method" onchange="requestUpdate()">
 			<option value="euler">Euler</option>
 			<option value="taylor">Taylor</option>
 		</select>
+		</p>
 		<div id="result" style="width:800px; height: 500px;"></div>
+	</div>
 	</body>
 </html>
