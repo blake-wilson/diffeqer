@@ -7,9 +7,9 @@ body {
 	width: 80%;
 }
 
-#app_area {
+div#app_area {
 	text-align: center;
-	width: 40%;
+	max-width: 50em;
 	margin: auto;
 	border-radius: 25px;
 	padding: 2em;

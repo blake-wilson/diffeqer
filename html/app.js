@@ -11,7 +11,6 @@ function requestUpdate() {
 			var min = Math.min.apply(Math, info.estimates);
 
 			var options = {
-				title: "Solution for Equation",
 				hAxis: {title: "Time", minValue: info.time[0], maxValue: info.time[info.time.length -1]},
 				vAxis: {title: "Value", minValue: min, maxValue: max},
 				legend: "none"
