@@ -15,7 +15,7 @@ the following format:
 
 Expressions can use the operators ```'+', '-', '*', '/', and '^'```.  They are entered as they would intuitively
 be described.  For exmample, ```3*x^2``` is a valid expression (whose solution as a differential
-equation x' = 3*x^2 is x^3).
+equation x' = 3*t^2 is t^3).
 
 ####Deployed App
 
