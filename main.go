@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"strings"
 
 	"github.com/blake-wilson/diffeq/methods"
 	"github.com/blake-wilson/exparser"
@@ -27,7 +28,8 @@ var opts diffeqOpts
 func evaluateDiffeq(expression string) *DiffeqData {
 	var times, estimates []float64
 
-	function, err := exparser.EvalExpression(expression)
+	exprLower := strings.ToLower(expression)
+	function, err := exparser.EvalExpression(exprLower)
 	if err != nil {
 		// error parsing expression
 		return nil

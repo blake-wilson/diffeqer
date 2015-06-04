@@ -1,6 +1,10 @@
 body {
-	font-family: sans-serif;
 	background: #EAEAEA;
+}
+
+body, input {
+	font-family: sans-serif;
+	font-size: 1.2em;
 }
 
 .app_element {
@@ -15,3 +19,4 @@ div#app_area {
 	padding: 2em;
 	background: #FFFFFF;
 }
+
