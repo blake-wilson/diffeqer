@@ -21,7 +21,7 @@ func Test_NoError(t *testing.T) {
 		Timestep:    0.01,
 		InitialTime: 0,
 		FinalTime:   20,
-		Expression:  "x^1.1",
+		Expression:  "x*2",
 		Method:      "euler",
 	}
 
@@ -32,6 +32,6 @@ func Test_NoError(t *testing.T) {
 	client := &http.Client{}
 	resp, err := client.Do(req)
 
-	assert.Nil(t, err)
+	assert.NoError(t, err)
 	defer resp.Body.Close()
 }

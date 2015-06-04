@@ -2,11 +2,11 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
 	"net/http"
 	"strings"
 
 	"github.com/blake-wilson/diffeq/methods"
+	mTypes "github.com/blake-wilson/diffeq/types"
 	"github.com/blake-wilson/exparser"
 )
 
@@ -25,26 +25,21 @@ type diffeqOpts struct {
 
 var opts diffeqOpts
 
-func evaluateDiffeq(expression string) *DiffeqData {
-	var times, estimates []float64
+func evaluateDiffeq(expression string) (*DiffeqResponse, error) {
+	var estimates []*mTypes.EvalPoint
 
 	exprLower := strings.ToLower(expression)
 	function, err := exparser.EvalExpression(exprLower)
 	if err != nil {
 		// error parsing expression
-		return nil
+		return nil, err
 	}
 
 	switch opts.Method {
-	case "taylor":
-		times, estimates = diffeq.Taylor(function, 1, opts.InitialTime, opts.FinalTime, opts.Timestep, function)
 	case "euler":
-		times, estimates = diffeq.Euler(function, 1, opts.InitialTime, opts.FinalTime, opts.Timestep)
+		estimates, err = methods.Euler(function, 1, opts.InitialTime, opts.FinalTime, opts.Timestep)
 	}
-	return &DiffeqData{
-		Time:      times,
-		Estimates: estimates,
-	}
+	return splitEvalSlice(estimates), err
 }
 func requestHandler(w http.ResponseWriter, r *http.Request) {
 	decoder := json.NewDecoder(r.Body)
@@ -53,14 +48,12 @@ func requestHandler(w http.ResponseWriter, r *http.Request) {
 		// Could not decode JSON
 		return
 	}
-	fmt.Printf("OPTS: %v\n\n", opts)
-	response := evaluateDiffeq(opts.Expression)
+	response, err := evaluateDiffeq(opts.Expression)
 
-	fmt.Printf("resonse:\n\n", response)
 	writeResponse(w, response)
 }
 
-func writeResponse(w http.ResponseWriter, data *DiffeqData) {
+func writeResponse(w http.ResponseWriter, data *DiffeqResponse) {
 	json, err := json.Marshal(data)
 
 	if err != nil {
