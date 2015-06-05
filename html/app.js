@@ -39,8 +39,12 @@ function requestUpdate() {
 
 function draw_chart(xVals, yVals, options) {
 	var arr = [['x', 'y']];
+	time = [];
+	values = [];
 	for (var i = 0; i < xVals.length; i++) {
-		arr.push([xVals[i], yVals[i]]);
+		time = Number(xVals[i].toPrecision(5));
+		value = Number(yVals[i].toPrecision(6));
+		arr.push([time, value]);
 	}
 	var data = google.visualization.arrayToDataTable(arr);
 
