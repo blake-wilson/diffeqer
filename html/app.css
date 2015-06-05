@@ -2,12 +2,15 @@ body {
 	background: #EAEAEA;
 }
 
-body, input {
+body, table, input, select {
 	font-family: sans-serif;
-	font-size: 1.2em;
+	font-size: 1.1em;
 }
 
-.app_element {
+
+div#options {
+	text-align: center;
+	margin: auto;
 	width: 80%;
 }
 
@@ -20,3 +23,22 @@ div#app_area {
 	background: #FFFFFF;
 }
 
+
+td {
+	padding-top: 0.5em;
+	padding-bottom: 0.5em;
+}
+
+
+table {
+	width: 100%;
+	text-align: center;
+	background-color: #EAEAEA;
+	border-collapse:collapse;
+    border-radius: 15px;
+
+}
+
+input.app_element {
+	width: 80%;
+}

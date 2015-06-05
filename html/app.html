@@ -5,29 +5,45 @@
 	</head>
 	<body>
 		<div align="center" id="app_area">
-		<p>Timestep
-		<br />
-		<input type="range" class="app_element" id="timestep" value="100" min="1",
-		max="200"
-		oninput="requestUpdate()">
-		</p>
-		<p>Range</p>
-		<input type="range" class="app_element" id="range" value="4" min="1" max="30"
-		oninput="requestUpdate()">
-		<br />
-		<br />
-		<p>
-		y' = <input class="app_element" id="expression" value="t-2*x" onkeydown="if (event.keyCode == 13)
-		requestUpdate()">
-		<br />
-		<br />
-		</p>
-		<p>Numerical Method
-		<select id="method" onchange="requestUpdate()">
-			<option value="euler">Euler</option>
-			<option value="taylor">Taylor</option>
-		</select>
-		</p>
+			<div id="options">
+				<table>
+					<tr>
+						<td>
+							Timestep
+							<br />
+							<input type="range" class="app_element" id="timestep" value="100" min="1",
+								max="200"
+								oninput="requestUpdate()">
+						</td>
+						<td>
+							Range
+							<br />
+							<input type="range" class="app_element" id="range" value="4" min="1" max="30"
+								oninput="requestUpdate()">
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<br />
+							Initial Time <input id="tinit" value="0" size="5" oninput="requestUpdate()">
+						</td>
+						<td>
+							<br />
+							Initial Value <input id="yinit" value="1" size="5" oninput="requestUpdate()">
+
+						</td>
+					</tr>
+				</table>
+				<br />
+				y' = <input class="app_element" id="expression" value="t-2*x" onkeydown="if (event.keyCode == 13)
+								requestUpdate()">
+				<br /><br />
+				Numerical Method
+				<select id="method" onchange="requestUpdate()">
+					<option value="euler">Euler</option>
+					<option value="rk4">RK4</option>
+				</select>
+		</div>
 		<div id="result" style="width:100%; height: 500px;"></div>
 	</div>
 	<script src="app.js"></script>

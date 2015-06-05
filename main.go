@@ -12,9 +12,10 @@ import (
 
 type diffeqOpts struct {
 	// fields used for numerical method
-	Timestep    float64 `json:"timestep"`
-	InitialTime float64 `json:"initial_time"`
-	FinalTime   float64 `json:"final_time"`
+	Timestep     float64 `json:"timestep"`
+	InitialValue float64 `json:"initial_value"`
+	InitialTime  float64 `json:"initial_time"`
+	FinalTime    float64 `json:"final_time"`
 
 	// string representation of diffeq.
 	Expression string `json:"expression"`
@@ -37,7 +38,9 @@ func evaluateDiffeq(expression string) (*DiffeqResponse, error) {
 
 	switch opts.Method {
 	case "euler":
-		estimates, err = methods.Euler(function, 1, opts.InitialTime, opts.FinalTime, opts.Timestep)
+		estimates, err = methods.Euler(function, opts.InitialValue, opts.InitialTime, opts.FinalTime, opts.Timestep)
+	case "rk4":
+		estimates, err = methods.RK4(function, opts.InitialValue, opts.InitialTime, opts.FinalTime, opts.Timestep)
 	}
 	return splitEvalSlice(estimates), err
 }
@@ -67,6 +70,7 @@ func writeResponse(w http.ResponseWriter, data *DiffeqResponse) {
 
 func init() {
 	opts.Timestep = 0.01
+	opts.InitialValue = 1
 	opts.InitialTime = 0
 	opts.FinalTime = 10
 	http.HandleFunc("/", requestHandler)
