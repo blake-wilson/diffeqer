@@ -14,6 +14,7 @@ function requestUpdate() {
 				hAxis: {title: "Time", minValue: info.time[0], maxValue: info.time[info.time.length -1],
 				       gridlines: {count: 8}},
 				vAxis: {title: "Value", minValue: min, maxValue: max, gridlines: {count: 8}},
+				chartArea: {top:'10%', bottom: 0, height: '80%'},
 				legend: "none"
 			};
 
