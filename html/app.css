@@ -7,7 +7,6 @@ body, table, input, select {
 	font-size: 1.1em;
 }
 
-
 div#options {
 	text-align: center;
 	margin: auto;
@@ -37,6 +36,10 @@ table {
 	border-collapse:collapse;
     border-radius: 15px;
 
+}
+
+input {
+	border-radius: 5px;
 }
 
 input.app_element {
