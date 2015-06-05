@@ -22,11 +22,12 @@ function requestUpdate() {
 	}
 	xhr.open("POST", HOST, true);
 
+	tinit = Number(document.getElementById("tinit").value)
 	var request = {
 		timestep: Number(document.getElementById("timestep").value) * 0.001,
-		initial_time: Number(document.getElementById("tinit").value),
+		initial_time: tinit,
 		initial_value: Number(document.getElementById("yinit").value),
-		final_time: Number(document.getElementById("range").value),
+		final_time: Number(document.getElementById("range").value) + tinit,
 
 		method: document.getElementById("method").value,
 		expression: document.getElementById("expression").value
