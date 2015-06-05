@@ -11,8 +11,9 @@ function requestUpdate() {
 			var min = Math.min.apply(Math, info.estimates);
 
 			var options = {
-				hAxis: {title: "Time", minValue: info.time[0], maxValue: info.time[info.time.length -1]},
-				vAxis: {title: "Value", minValue: min, maxValue: max},
+				hAxis: {title: "Time", minValue: info.time[0], maxValue: info.time[info.time.length -1],
+				       gridlines: {count: 8}},
+				vAxis: {title: "Value", minValue: min, maxValue: max, gridlines: {count: 8}},
 				legend: "none"
 			};
 
@@ -43,3 +44,5 @@ function draw_chart(xVals, yVals, options) {
 
 	chart.draw(data, options);
 }
+
+requestUpdate()
