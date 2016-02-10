@@ -64,6 +64,7 @@ func writeResponse(w http.ResponseWriter, data *DiffeqResponse) {
 		return
 	}
 
+	w.Header().Add("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Content-Type", "application/json")
 	w.Write(json)
 }
