@@ -5,6 +5,8 @@ the following format:
 ```
 {
     'timestep': NUMBER, // the timestep to use for the solver
+    'inital_time': NUMBER // the initial time value to begin evaluating
+    'initial_value': NUMBER // the value at the initial time
     'final_time': NUMBER, // the last time value to evaluate
     'method': STRING // the method to use ('Euler' or 'Taylor')
     'expression': STRING // the derivative of the solution as a string expression
