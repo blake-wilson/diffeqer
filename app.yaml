@@ -5,4 +5,4 @@ handlers:
   static_dir: html
 
 - url: /.*
-  script: _go_app
+  script: auto
